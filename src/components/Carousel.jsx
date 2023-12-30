@@ -1,0 +1,57 @@
+import React, { Component } from "react";
+import "./Carousel.css";
+import { images } from "../data/CarouselData";
+// you can explore more - and check as how to use materiul ui
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+
+// implement the class below
+class Carousel extends Component {
+  constructor(){
+      super()
+      this.state={
+        currIndex:0
+      }
+  }
+   
+   inc=()=>{
+    if(this.state.currIndex==images.length-1){
+        this.setState({currIndex:0})
+    }
+    else{
+    this.setState({currIndex:this.state.currIndex+1})
+    }
+  }
+
+  dec=()=>{
+    if(this.state.currIndex==0){
+        this.setState({currIndex:2})
+    }
+    else{
+    this.setState({currIndex:this.state.currIndex-1})
+    }
+  }
+
+  render(){
+    return(
+        <>
+        <div className="carousal-container flex">
+            <div onClick={this.dec} className="left-arrow arrowdiv flex">
+               <ArrowBackIosIcon/>
+            </div>
+           
+                <h2 className="title">{images[this.state.currIndex].title}</h2>
+                <img className="image" src={images[this.state.currIndex].img} alt="" />
+                <h4 className="caption">{images[this.state.currIndex].subtitle}</h4>
+            
+
+            <div onClick={this.inc} className="right-arrow arrowdiv flex">
+               <ArrowForwardIosIcon/>
+            </div>
+        </div>
+        </>
+    )
+  }
+}
+
+export default Carousel;
